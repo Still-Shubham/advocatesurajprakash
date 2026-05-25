@@ -1681,37 +1681,82 @@
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background: var(--navy);
-    z-index: 999;
+    z-index: 1100;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 28px;
+    gap: 24px;
     transform: translateX(100%);
-    transition: transform 0.4s ease;
+    transition: transform 0.4s cubic-bezier(0.77,0,0.175,1);
+    overflow-y: auto;
+    padding: 80px 20px 40px;
   }
 
   .mobile-menu.open { transform: translateX(0); }
 
   .mobile-menu a {
-    color: var(--white);
+    color: rgba(255,255,255,0.85);
     text-decoration: none;
     font-family: 'Playfair Display', serif;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 600;
     transition: color 0.3s;
+    letter-spacing: 0.5px;
   }
 
   .mobile-menu a:hover { color: var(--gold); }
 
   .mobile-close {
-    position: absolute;
-    top: 24px; right: 24px;
-    background: none;
-    border: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1101;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
     color: var(--gold);
-    font-size: 28px;
+    font-size: 20px;
     cursor: pointer;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+  }
+
+  .mobile-close:hover { background: rgba(201,168,76,0.3); }
+
+  .mobile-menu-logo {
+    position: absolute;
+    top: 28px;
+    left: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .mobile-menu-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(201,168,76,0.3);
+    margin: 4px 0;
+  }
+
+  .mobile-menu-cta {
+    margin-top: 12px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy) !important;
+    padding: 13px 36px;
+    border-radius: 2px;
+    font-size: 13px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
   }
 
   /* ===== RESPONSIVE ===== */
@@ -1724,22 +1769,118 @@
   }
 
   @media (max-width: 768px) {
+    /* Navbar */
     .nav-links { display: none; }
     .hamburger { display: flex; }
-    .hero-stats { display: none; }
-    .footer-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 4%; height: 64px; }
+
+    /* Hero — show stats below buttons on mobile */
+    #home { min-height: 100svh; }
+    .hero-content { padding: 100px 5% 50px; display: flex; flex-direction: column; justify-content: center; }
+    .hero-stats {
+      position: static;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 44px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 6px;
+      overflow: hidden;
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    .stat-item {
+      flex: 1;
+      padding: 18px 10px;
+      border-right: 1px solid rgba(201,168,76,0.15);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-size: 26px; }
+    .stat-label { font-size: 9px; letter-spacing: 1px; }
+    .hero-scroll { display: none; }
+
+    /* Section spacing */
+    .section-pad { padding: 60px 5%; }
+    .section-header { margin-bottom: 44px; }
+
+    /* About */
     .about-details { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    .section-pad { padding: 70px 5%; }
-    .hero-content { padding: 0 5%; }
+    .about-badge-exp { left: 0; }
+
+    /* Practice */
+    .practice-grid { grid-template-columns: 1fr; gap: 1px; }
+
+    /* Testimonials */
     .testi-grid { grid-template-columns: 1fr; }
+
+    /* Blog */
     .blog-grid { grid-template-columns: 1fr; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+
+    /* Form */
+    .form-row { grid-template-columns: 1fr; }
+
+    /* Contact form padding */
+    .contact-form-wrap { padding: 28px 20px; }
+
+    /* Toast — wrap on small screens */
+    .toast {
+      white-space: normal;
+      max-width: 88vw;
+      text-align: center;
+      font-size: 13px;
+      padding: 12px 18px;
+    }
+
+    /* Chat widget — smaller on mobile */
+    .chat-widget { bottom: 96px; right: 16px; }
+    .chat-panel { width: 280px; right: 0; }
+    .whatsapp-float { bottom: 24px; right: 16px; width: 48px; height: 48px; font-size: 22px; }
+
+    /* Why grid */
+    .why-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
-    .hero-buttons { flex-direction: column; }
-    .btn-primary, .btn-outline { text-align: center; justify-content: center; }
-    .modal-box { padding: 28px 20px; }
+    /* Hero */
+    .hero-title { font-size: 38px; }
+    .hero-sub { font-size: 16px; }
+    .hero-buttons { flex-direction: column; gap: 12px; }
+    .btn-primary, .btn-outline { text-align: center; justify-content: center; width: 100%; }
+
+    /* Stats — stack 3 in a row but smaller */
+    .stat-num { font-size: 22px; }
+    .stat-label { font-size: 8px; }
+
+    /* Sections */
+    .section-pad { padding: 50px 4%; }
+    .section-title { font-size: 26px; }
+
+    /* About card */
+    .about-img-inner { aspect-ratio: 3/2; }
+
+    /* Practice cards */
+    .practice-card { padding: 28px 22px; }
+
+    /* Contact form */
+    .contact-form-wrap { padding: 24px 16px; }
+    .contact-form-wrap h3 { font-size: 20px; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; gap: 8px; }
+    .footer-bottom-links { justify-content: center; }
+
+    /* Modal */
+    .modal-box { padding: 28px 18px; }
+
+    /* Chat panel */
+    .chat-panel { width: calc(100vw - 32px); right: -16px; }
   }
 
   /* ===== APPOINTMENT CALENDAR ===== */
@@ -1885,15 +2026,18 @@
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-menu-logo">Adv. Suraj Prakash</span>
   <button class="mobile-close" id="mobileClose"><i class="fas fa-times"></i></button>
-  <a href="#home" class="mob-link">Home</a>
   <a href="#about" class="mob-link">About</a>
   <a href="#practice" class="mob-link">Practice Areas</a>
   <a href="#courts" class="mob-link">Courts</a>
+  <a href="#why" class="mob-link">Why Choose Us</a>
+  <div class="mobile-menu-divider"></div>
   <a href="#testimonials" class="mob-link">Testimonials</a>
   <a href="#faq" class="mob-link">FAQ</a>
   <a href="#blog" class="mob-link">Blog</a>
-  <a href="#contact" class="mob-link">Contact</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#contact" class="mob-link mobile-menu-cta">Book Consultation</a>
 </div>
 
 <!-- ===== HERO ===== -->
@@ -1925,7 +2069,7 @@
   </div>
   <div class="hero-stats">
     <div class="stat-item">
-      <div class="stat-num">250+</div>
+      <div class="stat-num">500+</div>
       <div class="stat-label">Cases Handled</div>
     </div>
     <div class="stat-item">
