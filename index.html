@@ -26,13 +26,14 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
 
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--white);
     color: var(--text-dark);
     overflow-x: hidden;
+    max-width: 100vw;
   }
 
   h1, h2, h3, h4 {
@@ -1774,32 +1775,10 @@
     .hamburger { display: flex; }
     nav { padding: 0 4%; height: 64px; }
 
-    /* Hero — show stats below buttons on mobile */
+    /* Hero — keep stats desktop only */
     #home { min-height: 100svh; }
     .hero-content { padding: 100px 5% 50px; display: flex; flex-direction: column; justify-content: center; }
-    .hero-stats {
-      position: static;
-      display: flex;
-      justify-content: center;
-      gap: 0;
-      margin-top: 44px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(201,168,76,0.15);
-      border-radius: 6px;
-      overflow: hidden;
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-    .stat-item {
-      flex: 1;
-      padding: 18px 10px;
-      border-right: 1px solid rgba(201,168,76,0.15);
-      text-align: center;
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-num { font-size: 26px; }
-    .stat-label { font-size: 9px; letter-spacing: 1px; }
+    .hero-stats { display: none; }
     .hero-scroll { display: none; }
 
     /* Section spacing */
@@ -1809,6 +1788,8 @@
     /* About */
     .about-details { grid-template-columns: 1fr; }
     .about-badge-exp { left: 0; }
+    .about-img-frame { overflow: visible; }
+    .about-visual { overflow: hidden; padding-bottom: 20px; }
 
     /* Practice */
     .practice-grid { grid-template-columns: 1fr; gap: 1px; }
@@ -2069,7 +2050,7 @@
   </div>
   <div class="hero-stats">
     <div class="stat-item">
-      <div class="stat-num">500+</div>
+      <div class="stat-num">250+</div>
       <div class="stat-label">Cases Handled</div>
     </div>
     <div class="stat-item">
